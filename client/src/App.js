@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from '@apollo/react-hooks'
 import BookList from './components/BookList'
+import AddBook from './components/AddBook'
 
 
 //apollo cilent
@@ -16,7 +17,7 @@ class App extends Component {
         <div className="App" id="main">
           <h1>Ninja reading list</h1>
           <BookList/>
-
+          <AddBook/>
           
         </div>
       </ApolloProvider>

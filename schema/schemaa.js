@@ -34,6 +34,24 @@ const typeDefs = `
         authors: [Author]
         author(id: ID): Author
     }
+
+    type Mutation{
+        addBook(
+            name: String!
+            genre: String!
+            authorId: String!
+        ): Book
+
+        addAuthor(
+            name: String!
+            age: String!
+        ): Author
+    }
+
+    schema {
+        query: Query
+        mutation: Mutation
+    }
 `
 
 const resolvers    ={
@@ -51,13 +69,28 @@ const resolvers    ={
             return Author.findById(id);
         },
     },
-
+    Mutation:{
+        addBook: (parent, args) => {
+            let book = new Book(args);
+            return book.save()
+        },
+        addAuthor: (parent, args) => {
+            let author = new Author(args);
+            return author.save()
+        } 
+    },
     Book: {
         author: ({authorId}, args) => {
             return Author.findById(authorId);
         },
         genre: (parent, args) => {
             return parent.genre + "_modified"
+        }
+    },
+
+    Author: {
+        books:(parent, args) => {
+            return Book.find({authorId: parent.id});
         }
     }
 }

@@ -2,19 +2,12 @@ import React, { Component, useState } from 'react';
 import gql from 'graphql-tag';
 import {useQuery} from '@apollo/react-hooks'
 import BookDetail from './BookDetail'
+import {getBooksQuery} from '../queries/query'
 
-const getBooks = gql`
-  query getBooks{
-    books {
-      id
-      name
-    }
-  }
-`;
 
 function BookList(props){
 
-    const { loading, error, data } = useQuery(getBooks);
+    const { loading, error, data } = useQuery(getBooksQuery);
     const [selectedBook, setSelectedBook] = useState('')
 
 
