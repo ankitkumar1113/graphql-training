@@ -95,50 +95,7 @@ const resolvers    ={
     }
 }
 
-
-
-// const Mutations = new GraphQLObjectType({
-//     name: 'Mutation',
-//     fields: {
-//         addBook: {
-//             type: BookType,
-//             args: {
-//                 name: { type: GraphQLString },
-//                 genre: { type: GraphQLString },
-//                 authorId: { type: GraphQLString },
-//             },
-//             resolve(parent, args) {
-                
-//                 let book = new Book({
-//                     name: args.name,
-//                     genre: args.genre,
-//                     authorId: args.authorId
-//                 });
-//                 return book.save()
-                
-//             }
-//         },
-
-//         addAuthor: {
-//             type: AuthorType,
-//             args: {
-//                 name: { type: new GraphQLNonNull(GraphQLString) },
-//                 age: { type: new GraphQLNonNull(GraphQLString) },
-                
-//             },
-//             resolve(parent, args) {
-                
-//                 let author = new Author(args);
-//                 return author.save()
-                
-//             }
-//         },
-        
-//     }
-    
-// })
-
-module.exports = new makeExecutableSchema({
+module.exports = {
     typeDefs,
     resolvers
-})
+}

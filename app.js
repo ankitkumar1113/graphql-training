@@ -1,10 +1,8 @@
 const express = require('express');
-const graphqlHTTP = require("express-graphql")
-const schema = require('./schema/schemaa')
+const { ApolloServer, gql } = require('apollo-server-express');
+const { typeDefs, resolvers } = require('./schema/schemaa');
 const mongoose = require('mongoose')
 const cors = require('cors')
-
-const app = express();
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/ninja_reading';
@@ -17,13 +15,16 @@ mongoose.connection.once('error',() => {
     console.log('connected to database failed');
 })
 
+
+const app = express();
 app.use(cors());
 
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+});
 
-app.use('/graphql', graphqlHTTP({
-    schema,
-    graphiql: true
-}))
+server.applyMiddleware({ app });
 
 app.listen(4000, () =>{
     console.log('listening for request on port 4000');
